@@ -1,11 +1,22 @@
 from pytube import YouTube
 import os
 import requests as re
+import math
 
-url = input("Please enter the url of the video: ")
+def onComplete(stream, file_path):
+    print("Download Complete")
+
+def onProgress(stream, chunk, bytes_remaining):
+    # prints the percentage of the file that has been downloaded
+    print(f"{math.floor(((stream.filesize-bytes_remaining)/stream.filesize)*100)}%")
+
+# url = input("Please enter the url of the video: ")
+url = "https://www.youtube.com/watch?v=nwRoHC83wx0"
 # check if url is valid
 try :
-    videoObject = YouTube(url)
+    videoObject = YouTube(url, 
+    on_progress_callback=onProgress, 
+    on_complete_callback=onComplete)
 
     # video information
     # print(videoObject.title)
@@ -26,10 +37,9 @@ try :
     if os.path.exists(os.path.join('C:',os. environ["HOMEPATH"],r'Downloads\Trying')):
         # download the video's audio
         videoObject.streams.get_audio_only().download(os.path.join('C:',os. environ["HOMEPATH"],r'Downloads\Trying'))
-        print("Download Complete")
     else:
         # print that the directory download/trying does not exist
         print(os.path.join('C:',os. environ['HOMEPATH'],r'Downloads\Trying'), "does not exist")
     
 except:
-    print("Invalid url")
+    print("Error")
