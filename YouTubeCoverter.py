@@ -23,9 +23,9 @@ try :
 
 
     # check if directory exists
-    if os.path.exists(os.path.join('C:',os. environ["HOMEPATH"],'Downloads\Trying')):
+    if os.path.exists(os.path.join('C:',os. environ["HOMEPATH"],r'Downloads\Trying')):
         # download the video's audio
-        videoObject.streams.get_audio_only().download(os.path.join('C:',os. environ["HOMEPATH"],'Downloads\Trying'))
+        videoObject.streams.get_audio_only().download(os.path.join('C:',os. environ["HOMEPATH"],r'Downloads\Trying'))
         print("Download Complete")
     else:
         # print that the directory download/trying does not exist
